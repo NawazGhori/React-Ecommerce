@@ -1,0 +1,45 @@
+===================
+17-05-2021
+===================
+Project Domain		:	ECommerce
+
+Duration : 30 days   (30 - 40 days)
+
+1) MERN Stack Development
+	M - MongoDB
+	E - ExpressJS
+	R - ReactJS With TypeScript
+	N - NodeJS
+
+2) CSS3 (Flex Box)
+
+3) Modules in ECommerce Project	
+	=> Registration Module
+	=> Signin Module
+	=> Total Products Module
+	=> Details Products Module
+	=> JWT Authentication Secuirity
+		JSON Web Token
+	=> bcryptjs
+
+4) State Management
+	Redux Middleware
+	Saga MiddleWare
+	Thunk Middleware
+
+5) Cloud Deployment
+	AWS Deployment
+	Amazon Web Services Deployment
+
+6) CI / CD Process
+	Continuos Integration & Continuos Deployment
+
+7) GitHub
+
+8) Payment Gateways Integration
+	=> Paypal Integration
+	=> Stripe Payment Integration
+
+9) Debugging
+
+10) Portfolio
