@@ -201,4 +201,44 @@ ecommerce
 		finally "ProductsActionTypes" are ready.
 
 
+=================
+25-05-2021
+=================
 
+create the actions
+------------------
+********************************************************
+ecommerce
+        src
+		  actions
+		    ProductActions.tsx
+*******************************************************
+	finally "getProducts()" action is ready.
+
+
+create the reducer
+------------------
+******************************************************
+ecommerce
+        src
+		  reducer
+		     ProductReducer.tsx
+******************************************************
+		finally "productReducer" is ready.
+
+
+create the store
+----------------
+		index.tsx
+			finally rootReducer is ready.
+		"products" is the key, associated with productReducer.
+
+
+perform the dispatch and subscription operation
+-----------------------------------------------
+********************************************************
+ecommerce
+       src
+	     screens
+		   ProductsScreen.tsx
+********************************************************
