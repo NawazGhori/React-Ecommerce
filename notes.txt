@@ -242,3 +242,26 @@ ecommerce
 	     screens
 		   ProductsScreen.tsx
 ********************************************************
+
+
+================
+27-05-2021
+================
+						***** create the single page application *****
+
+	- in our "ecommerce" project, "App" component is "master" component.
+	- we want to make "HomeScreen" as default component in single page application.
+
+									***** create the utility components *****
+
+	***************************************
+	ecommerce
+	       src
+		     components
+			    MessageBox.tsx
+				LoadingBox.tsx
+				Rating.tsx
+	***************************************
+			- "MessageBox.tsx" used to display the error messages.
+			- "LoadingBox.tsx" used to display the loading bar  (spinner) (progress bar)
+			- "Rating.tsx" used to show the rating bar

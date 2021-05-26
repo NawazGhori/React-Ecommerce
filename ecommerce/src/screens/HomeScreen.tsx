@@ -8,7 +8,7 @@ interface IProps {
 }
 interface IState { }
 
-class ProductsScreen extends Component<IProps, IState>{
+class HomeScreen extends Component<IProps, IState>{
     constructor(props: IProps) {
         super(props)
     }
@@ -38,4 +38,4 @@ const send = (dispatch: any) => {
         getProducts_fn: () => { dispatch(getProducts()) }
     }
 }
-export default connect(receive,send)(ProductsScreen);
+export default connect(receive,send)(HomeScreen);
