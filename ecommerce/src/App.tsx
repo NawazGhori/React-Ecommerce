@@ -6,19 +6,25 @@
 */
 
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
 import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 
-function App() {
-   return (
-      <React.Fragment>
+interface IProps{}
+interface IState{}
+
+class App extends React.Component<IProps,IState>{
+   constructor(props:IProps){
+      super(props)
+   }
+   render(){
+      return(
+         <React.Fragment>
          <BrowserRouter>
 
 
             <div className="grid-container">
-               <header>
+               <header className="row">
                   <div>
                      <NavLink to="/" exact={true} strict className="brand">EShop</NavLink>
                   </div>
@@ -37,7 +43,8 @@ function App() {
             </div>
          </BrowserRouter>
       </React.Fragment>
-   );
+      )
+   }
 }
-
+ 
 export default App;

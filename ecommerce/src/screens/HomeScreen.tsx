@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import getProducts from '../actions/ProductActions';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import Products from '../components/Products';
 
 interface IProps {
     getProducts_fn: any,
@@ -21,16 +24,21 @@ class HomeScreen extends Component<IProps, IState>{
         const { loading, products, error } = this.props.result;
         return (
             <React.Fragment>
-                {JSON.stringify(loading)}....{JSON.stringify(products)}....{error}
+                {/* {JSON.stringify(loading)}....{JSON.stringify(products)}....{error} */}
+                {
+                    !loading ? (<LoadingBox></LoadingBox>):
+                    error === "Network Error" ? (<MessageBox variant="danger">{error}</MessageBox>):
+                    (<Products arr={products}></Products>)
+                }
             </React.Fragment>
         )
     }
 
 }
 
-const receive = (state:any) => {
+const receive = (state: any) => {
     return {
-        result : state.products
+        result: state.products
     }
 }
 const send = (dispatch: any) => {
@@ -38,4 +46,4 @@ const send = (dispatch: any) => {
         getProducts_fn: () => { dispatch(getProducts()) }
     }
 }
-export default connect(receive,send)(HomeScreen);
+export default connect(receive, send)(HomeScreen);

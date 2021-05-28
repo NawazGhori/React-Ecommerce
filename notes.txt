@@ -245,7 +245,7 @@ ecommerce
 
 
 ================
-27-05-2021
+26-05-2021
 ================
 						***** create the single page application *****
 
@@ -264,12 +264,18 @@ ecommerce
 	***************************************
 			- "MessageBox.tsx" used to display the error messages.
 			- "LoadingBox.tsx" used to display the loading bar  (spinner) (progress bar)
-			- "Rating.tsx" used to show the rating bar
 
 ===============
-28-05-2021
+27-05-2021
 ===============
+			- "Rating.tsx" used to show the rating bar
 				***** Main Screen Design *****
 App.tsx
 -------
+
+==============
+28-05-2021
+==============
+
+
 
