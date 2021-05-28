@@ -30,7 +30,7 @@ class HomeScreen extends Component<IProps, IState>{
 
 const receive = (state:any) => {
     return {
-        result : state
+        result : state.products
     }
 }
 const send = (dispatch: any) => {

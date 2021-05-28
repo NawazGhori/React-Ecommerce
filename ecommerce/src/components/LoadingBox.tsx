@@ -15,3 +15,5 @@ class LoadingBox extends Component<IProps,IState>{
         )
     }
 }
+
+export default LoadingBox;
