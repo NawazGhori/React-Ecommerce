@@ -14,7 +14,7 @@ class MessageBox extends Component<IProps,IState>{
     render(){
         return(
             <React.Fragment>
-                <div className={`alert alert-${this.props.variant} || "info"`}></div>
+                <div className={`alert alert-${this.props.variant} || "info"`}>{this.props.children}</div>
             </React.Fragment>
         )
     }
