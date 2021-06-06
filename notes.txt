@@ -278,4 +278,43 @@ App.tsx
 ==============
 
 
+===========================
+31-05-2021 && 01-05-2021
+===========================
+				Module 2 Implementation
+				======================
+1) implement the rest api
+	=> /api/products/:id
+
+2) navigate from HomeScreen to ProductScreen with "_id"
+
+=================
+02-03-2021
+=================
+
+3) implement the state management in ProductScreen
+			Redux
+			Thunk
+	*************************************
+	=> modal
+			Product.tsx
+				- we have already existed modal "Product".
+	=> types
+			DetailActionTypes.tsx
+				finally "DetailsLoadingAction" is ready.
+						@DetailsLoading
+						@DetailsLoadingSuccess
+						@DetailsLoadingFail
+	=> actions
+			DetailActions.tsx
+				finally "getDetails()" action is ready. 
+	=> reducer
+			finally "DetailReducer" is ready.
+			with "detailReducer" function.
+	=> store
+			index.tsx
+	=> Component
+			"ProductScreen"
+
+
 

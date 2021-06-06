@@ -25,31 +25,42 @@ app.use(cors());
 app.use(bodyparser.json());
 
 //read the data from client application
-app.use(bodyparser.urlencoded({extended:false}));
+app.use(bodyparser.urlencoded({ extended: false }));
 
 //make the availability of .env file
 dotenv.config();
 
 //connect to mongodb database by using mongoose module
-mongoose.connect("mongodb+srv://admin:admin@cluster0.jgnmk.mongodb.net/ecommerce-9am?retryWrites=true&w=majority",{
+mongoose.connect("mongodb+srv://admin:admin@cluster0.jgnmk.mongodb.net/ecommerce-9am?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
 })
 
 //handle the server side error
-app.use((err,req,res,next)=>{
-    res.status(500).send({"err":err.message})
+app.use((err, req, res, next) => {
+    res.status(500).send({ "err": err.message })
 })
 
-//Create GET Request
-app.get("/api/products",express_async_handler(async (req,res)=>{
+//Create GET Request to get all products list
+app.get("/api/products", express_async_handler(async(req, res) => {
     const products = await Product.find();
     res.send(products);
 }))
 
+
+//GET request to get a product with specified id
+app.get("/api/products/:id", express_async_handler(async(req, res) => {
+    const product = await Product.findOne({ "_id": new mongodb.ObjectID(req.params.id) });
+    if (product) {
+        res.status(200).send(product);
+    } else {
+        res.status(400).send({ "message": "no product available" })
+    }
+}))
+
 //assign the PORT number
 let port = process.env.PORT || 8080;
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`server started at port ${port}`)
 })

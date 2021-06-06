@@ -130,3 +130,8 @@ h2 {
 img {
     height: 25rem;
 }
+
+.back_screen {
+    color: #203040;
+    font-size: 2.5rem;
+}
