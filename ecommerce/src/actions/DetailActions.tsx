@@ -25,7 +25,6 @@ const getDetails = (id: any) => {
 
         try{
             const {data} = await axios.get(`http://localhost:8080/api/products/${id}`)
-            console.log(data)
             dispatch({
                 type: DETAILS_LOADING_SUCCESS,
                 loading: true,

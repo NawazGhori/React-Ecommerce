@@ -317,4 +317,62 @@ App.tsx
 			"ProductScreen"
 
 
+======================
+07-06-2021
+======================
+													Module3
 
+1) navigate from ProductScreen to CartScreen passing data of  (_id & qty)
+
+=============================
+08-06-2021 & 09-06-2021
+=============================
+
+2) Create the modal
+	http://localhost:8080/api/products/id
+		**************************************************
+		ecommerce
+		         src
+				    modal
+					    Cart.tsx
+		**************************************************
+			finally "Cart" modal is ready.
+
+3) Create the types
+		*****************************************************
+		ecommerce
+		        src
+				  types 
+				     CartActionTypes.tsx
+		*****************************************************
+				finally CartActionTypes are ready.
+
+
+4) Create the actions
+		*******************************************************
+		ecommerce
+		        src
+				  actions
+				      CartActions.tsx
+		*******************************************************
+			finally "addCartItem" action is ready with @id  @qty
+
+=============================================
+11-06-2021
+=============================================
+
+5) implement the reducer  (identify duplicate item and replace old qty with latest qty)
+		*********************************************************
+		ecommerce
+		        src
+				   reducer
+				       CartReducer.tsx
+		*********************************************************
+			finally "CartReducer" is ready.
+
+6) perform dispatch and subscription operation in CartScreen.
+
+==============
+12-06-2021
+==============
+7) use localStorage to persist cart items.

@@ -127,8 +127,8 @@ h2 {
     padding: 1rem 0;
 }
 
-img {
-    height: 25rem;
+.card img {
+    max-height: 25rem;
 }
 
 .back_screen {
@@ -168,4 +168,42 @@ button.primary {
 
 button.block {
     width: 100%;
+}
+
+.row.top {
+    align-items: flex-start;
+}
+
+img {
+    max-height: 450px;
+}
+
+.badge-success {
+    background-color: green;
+    color: white;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 50%;
+    position: relative;
+    top: -8px;
+    font-size: small;
+}
+
+.badge-empty {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 50%;
+    position: relative;
+    top: -8px;
+    font-size: small;
+}
+
+.cart-table td {
+    border: 1px solid black;
+}
+
+.cart-table img {
+    max-height: 10rem;
 }

@@ -5,6 +5,7 @@ import getDetails from "../actions/DetailActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
+import { History, LocationState } from "history";
 
 interface IState {
     qty: number;
@@ -14,6 +15,7 @@ interface IProps {
     match: match<paramRoutes>;
     getDetailsById: any;
     res: any;
+    history: History<LocationState>;
 }
 
 interface paramRoutes {
@@ -37,12 +39,16 @@ class ProductScreen extends Component<IProps, IState>{
     componentDidMount() {
         this.props.getDetailsById(this.props.match.params.id);
     }
+
+    addToCart = (id: any) => {
+        this.props.history.push(`/cart/${id}?qty=${this.state.qty}`)
+    }
     render() {
         const { loading, product, error } = this.props.res
         return (
             <React.Fragment>
                 {
-                    !loading ? (<LoadingBox></LoadingBox>) : error == "Network Error" ? (<MessageBox variant="danger">{error}</MessageBox>) : (<div>
+                    !loading ? (<LoadingBox></LoadingBox>) : error === "Network Error" ? (<MessageBox variant="danger">{error}</MessageBox>) : (<div>
                         <NavLink to="/" className="back_screen"><i className="fa fa-home"></i></NavLink>
 
                         <div className="row top">
@@ -72,18 +78,18 @@ class ProductScreen extends Component<IProps, IState>{
                                             <>
                                                 <li>
                                                     <div className="row center">Quantity:
-                                                        <select value={this.state.qty} onChange={(e:any)=>this.setQty(e.target.value)}>
+                                                        <select value={this.state.qty} onChange={(e: any) => this.setQty(e.target.value)}>
                                                             {
-                                                                [...Array(product.countInStock).keys()].map((x:any)=>(
-                                                                    <option key={x+1} value={x+1}>{x+1}</option>
-                                                                ))                                                                
+                                                                [...Array(product.countInStock).keys()].map((x: any) => (
+                                                                    <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                                ))
                                                             }
                                                         </select>
                                                     </div>
                                                 </li>
 
                                                 <li>
-                                                    <button className="primary block">Add to Cart</button>
+                                                    <button className="primary block" onClick={()=>{this.addToCart(product._id)}}>Add to Cart</button>
                                                 </li>
                                             </>
                                         )}
