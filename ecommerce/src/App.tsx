@@ -35,7 +35,7 @@ class App extends React.Component<IProps,IState>{
                   </div>
 
                   <div>
-                     <NavLink to="/cart" exact={true} strict>Cart
+                     <NavLink to="/cart"exact={true} strict >Cart
                         {this.props.count>0 ? <span className="badge-success">{this.props.count}</span>:<span className="badge-empty">{this.props.count}</span>}
                      </NavLink>
                      <NavLink to="/" exact={true} strict>SignIn</NavLink>
@@ -45,7 +45,7 @@ class App extends React.Component<IProps,IState>{
                <main>
                   <Route path="/" component={HomeScreen} exact={true} strict></Route>
                   <Route path="/product/:id" component={ProductScreen} exact={true} strict></Route>
-                  <Route path="/cart/:id" component={CartScreen} exact={true} strict></Route>
+                  <Route path="/cart/:id?" component={CartScreen} exact={true} strict></Route>
                </main>
 
                <footer className="row center">copyright@eshop.in</footer>

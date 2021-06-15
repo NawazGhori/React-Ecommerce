@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { match } from "react-router";
 import { Location } from "history";
 import { connect } from "react-redux";
-import addCartItem,{deleteCartItem} from "../actions/CartActions";
+import addCartItem, { deleteCartItem } from "../actions/CartActions";
+import { NavLink } from "react-router-dom";
+import MessageBox from "../components/MessageBox";
 
 interface IProps {
     match: match<routeParams>;
     location: Location;
     res: any;
     getAddItemResult: any;
-    deleteItemResult:any;
+    deleteItemResult: any;
 };
 
 interface IState { };
@@ -25,35 +27,93 @@ class CartScreen extends Component<IProps, IState>{
 
     componentDidMount() {
         this.props.getAddItemResult(this.props.match.params.id,
-                                    this.props.location.search ? (Number(this.props.location.search.split("=")[1])) : 1)
+            this.props.location.search ? (Number(this.props.location.search.split("=")[1])) : 1)
     }
-    deleteItem = (id:any)=>{
+    setQty = (id: any, qty: any) => {
+        this.props.getAddItemResult(id, Number(qty))
+    }
+    deleteItem = (id: any) => {
         this.props.deleteItemResult(id)
     }
     render() {
-        const {finalArray} = this.props.res
+        const { finalArray } = this.props.res
         console.log(finalArray)
         return (
             <React.Fragment>
-                cart screens
-                {JSON.stringify(finalArray)}
+                <h1>Shopping Cart</h1>
                 <div className="row top">
-                   {finalArray.map((element:any,index:number)=>(
-                       <div key={index}>
-                           <img src={element.image} className="small_img"></img> 
-                           <button onClick={()=>this.deleteItem(element._id)}>Delete</button>
-                       </div>
-                   ))} 
+                    <div className="col-2">
+                        {finalArray.length === 0 ?
+                            (<MessageBox variant="danger">Cart is Empty. <NavLink to="/" exact={true} strict>Start Shopping</NavLink></MessageBox>) : (
+                                <div>
+                                    <ul>
+                                        {finalArray.map((item: any, index: number) => (
+                                            <li key={index} className="cart-list-item">
+                                                <div>
+                                                    <img src={item.image} alt={item.name} className="small_img" />
+                                                </div>
+                                                <div>
+                                                    <NavLink to={`/product/${item._id}`}>
+                                                        <span>{item.name}</span></NavLink>
+                                                </div>
+                                                <div>${item.price}</div>
+                                                <div>
+                                                    <select value={item.qty} onChange={(e: any) => (this.setQty(item._id, e.target.value))}>
+                                                        {[...Array(item.countInStock).keys()].map((x: any) => (
+                                                            <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <span onClick={() => (this.deleteItem(item._id))}>
+                                                        <i className="fa fa-trash" aria-hidden="true"></i></span>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )
+                        }
+                    </div>
+
+                    <div className="col-1">
+
+                        <div className="card card-body">
+                            <ul>
+                                <li>
+                                    <div className="row">
+                                        <div>Total Items</div>
+                                        <div>{finalArray.reduce((arg1: any, arg2: any) => arg1 + arg2.qty, 0)}</div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div className="row">
+                                        <div>Total Price</div>
+                                        <div>
+                                        {finalArray.reduce((arg1: any, arg2: any) => arg1 + arg2.price * arg2.qty, 0)}
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button className="primary block">Proceed to Pay</button>
+                                </li>
+
+
+                            </ul>
+                        </div>                        
+                    </div>
+
                 </div>
                 {/* {JSON.stringify(finalArray)} */}
-                
+
             </React.Fragment>
         )
     }
 }
 
 const receive = (state: any) => {
-    return{
+    return {
         res: state.cart
     }
 }
@@ -63,9 +123,9 @@ const send = (dispatch: any) => {
         getAddItemResult: (id: string, qty: number) => {
             dispatch(addCartItem(id, qty))
         },
-        deleteItemResult: (id:string)=>{
+        deleteItemResult: (id: string) => {
             dispatch(deleteCartItem(id))
         }
     }
 }
-export default connect(receive,send)(CartScreen);
+export default connect(receive, send)(CartScreen);

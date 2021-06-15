@@ -13,6 +13,10 @@ const CartReducer = (state = initialState,action:CartActionTypes):IState=>{
     switch(action.type){
         case ADD_ITEM:
             const item = action.selectedItem;
+            if(item._id === ""){
+                return state
+                
+            }
             const existedItem = state.finalArray.find((obj)=>{return obj._id === item._id})
             if(existedItem){
                 return{
@@ -30,7 +34,7 @@ const CartReducer = (state = initialState,action:CartActionTypes):IState=>{
             const id = action.id;
             return {
                 ...state,
-                finalArray: state.finalArray.filter((obj)=> {return obj._id != id})
+                finalArray: state.finalArray.filter((obj)=> {return obj._id !== id})
             }
             break;
         default: 

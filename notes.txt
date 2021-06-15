@@ -382,5 +382,5 @@ App.tsx
 14-06-2021
 =============
 Implementation of remove cart item functionality.
-
+	cartActionTypes.tsx, CartActions.tsx, CartReducer.tsx,CartScreen.tsx
 

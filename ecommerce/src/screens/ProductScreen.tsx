@@ -41,7 +41,7 @@ class ProductScreen extends Component<IProps, IState>{
     }
 
     addToCart = (id: any) => {
-        this.props.history.push(`/cart/${id}?qty=${this.state.qty}`)
+        this.props.history.push(`/cart/${id}?qty=${this.state.qty}`)        
     }
     render() {
         const { loading, product, error } = this.props.res
