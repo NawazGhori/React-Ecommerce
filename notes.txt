@@ -376,3 +376,11 @@ App.tsx
 12-06-2021
 ==============
 7) use localStorage to persist cart items.
+
+
+=============
+14-06-2021
+=============
+Implementation of remove cart item functionality.
+
+

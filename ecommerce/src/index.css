@@ -207,3 +207,7 @@ img {
 .cart-table img {
     max-height: 10rem;
 }
+
+.small_img {
+    max-height: 5rem;
+}

@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { match } from "react-router";
 import { Location } from "history";
 import { connect } from "react-redux";
-import addCartItem from "../actions/CartActions";
+import addCartItem,{deleteCartItem} from "../actions/CartActions";
 
 interface IProps {
     match: match<routeParams>;
     location: Location;
     res: any;
     getAddItemResult: any;
+    deleteItemResult:any;
 };
 
 interface IState { };
@@ -26,47 +27,26 @@ class CartScreen extends Component<IProps, IState>{
         this.props.getAddItemResult(this.props.match.params.id,
                                     this.props.location.search ? (Number(this.props.location.search.split("=")[1])) : 1)
     }
-
+    deleteItem = (id:any)=>{
+        this.props.deleteItemResult(id)
+    }
     render() {
         const {finalArray} = this.props.res
         console.log(finalArray)
         return (
             <React.Fragment>
-
                 cart screens
-                {/* {this.props.match.params.id}<br />
-                {this.props.location.search ? (Number(this.props.location.search.split("=")[1])) : 1} */}
-
+                {JSON.stringify(finalArray)}
+                <div className="row top">
+                   {finalArray.map((element:any,index:number)=>(
+                       <div key={index}>
+                           <img src={element.image} className="small_img"></img> 
+                           <button onClick={()=>this.deleteItem(element._id)}>Delete</button>
+                       </div>
+                   ))} 
+                </div>
                 {/* {JSON.stringify(finalArray)} */}
-
-                <table className="cart-table">
-                    <thead>
-                        <tr>
-                            <td>Image</td>
-                            <td>Name</td>
-                            <td>Brand</td>
-                            <td>Description</td>
-                            <td>Price</td>
-                            <td>Qty</td>
-                            <td>Total</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {finalArray.map((obj:any) =>(
-                            <tr>
-                                <td><img src={obj.image} alt={obj.name}/></td>
-                                <td>{obj.name}</td>
-                                <td>{obj.brand}</td>
-                                <td>{obj.description}</td>
-                                <td>{obj.price}</td>
-                                <td>{obj.qty}</td>
-                                <td>{obj.price * obj.qty }</td>
-                            </tr>
-                        ))}
-                            
-                        
-                    </tbody>
-                </table>
+                
             </React.Fragment>
         )
     }
@@ -82,6 +62,9 @@ const send = (dispatch: any) => {
     return {
         getAddItemResult: (id: string, qty: number) => {
             dispatch(addCartItem(id, qty))
+        },
+        deleteItemResult: (id:string)=>{
+            dispatch(deleteCartItem(id))
         }
     }
 }
