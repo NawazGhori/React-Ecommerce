@@ -30,8 +30,10 @@ app.use(bodyparser.urlencoded({ extended: false }));
 //make the availability of .env file
 dotenv.config();
 
-//connect to mongodb database by using mongoose module
-mongoose.connect("mongodb+srv://admin:admin@cluster0.jgnmk.mongodb.net/ecommerce-9am?retryWrites=true&w=majority", {
+
+let MONGODB_URL = process.env.MONGODB_URL_1
+    //connect to mongodb database by using mongoose module
+mongoose.connect(MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -51,7 +53,8 @@ app.get("/api/products", express_async_handler(async(req, res) => {
 
 //GET request to get a product with specified id
 app.get("/api/products/:id", express_async_handler(async(req, res) => {
-    const product = await Product.findOne({ "_id": new mongodb.ObjectID(req.params.id) });
+    //const product = await Product.findOne({ "_id": new mongodb.ObjectID(req.params.id) });
+    const product = await Product.findOne({ "_id": mongoose.Types.ObjectId(req.params.id) });
     if (product) {
         res.status(200).send(product);
     } else {
