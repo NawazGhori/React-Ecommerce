@@ -2,7 +2,7 @@
 //require() is the predefined function used to import the node modules
 const express = require('express');
 const cors = require('cors');
-const mongodb = require('mongodb');
+// const mongodb = require('mongodb');
 const mongoose = require('mongoose');
 const jsonwebtoken = require("jsonwebtoken");
 const express_async_handler = require("express-async-handler");
@@ -10,6 +10,10 @@ const dotenv = require("dotenv");
 const bcryptjs = require("bcryptjs");
 const bodyparser = require('body-parser');
 const Product = require("./model/productModel");
+const User = require("./model/userModel");
+const data = require("./data");
+const generateToken = require("./generateToken");
+
 
 //to develop "rest api's" we should create "rest" object
 //we must dependent on "express" to develop "rest" object
@@ -31,7 +35,7 @@ app.use(bodyparser.urlencoded({ extended: false }));
 dotenv.config();
 
 
-let MONGODB_URL = process.env.MONGODB_URL_1
+let MONGODB_URL = process.env.MONGODB_URL
     //connect to mongodb database by using mongoose module
 mongoose.connect(MONGODB_URL, {
     useNewUrlParser: true,
@@ -59,6 +63,37 @@ app.get("/api/products/:id", express_async_handler(async(req, res) => {
         res.status(200).send(product);
     } else {
         res.status(400).send({ "message": "no product available" })
+    }
+}))
+
+app.get("/api/products/seed", express_async_handler(async(req, res) => {
+    await Product.remove();
+    const createProducts = await Product.insertMany(data.products);
+    res.send({ createProducts })
+}))
+
+app.get("/api/users/seed", express_async_handler(async(req, res) => {
+    await User.remove();
+    const createUsers = await User.insertMany(data.users);
+    res.send({ createUsers })
+}))
+
+app.post("/api/users/signin", express_async_handler(async(req, res) => {
+    const user = await User.findOne({ "email": req.body.email })
+    if (user) {
+        if (bcryptjs.compareSync(req.body.password, user.password)) {
+            res.status(200).send({
+                _id: user._id,
+                email: user.email,
+                isAdmin: user.isAdmin,
+                image: user.image,
+                token: generateToken(user)
+            })
+        } else {
+            res.status(401).send({ "message": "Invalid credentials!! Try Again" })
+        }
+    } else {
+        res.status(401).send({ "message": "Invalid credentials!! Try Again" })
     }
 }))
 
