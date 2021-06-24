@@ -9,10 +9,23 @@ export const SignIn = (login_details: any) => {
             const { data } = res;
             dispatch({
                 user_details: data,
+                error: "",
                 type: SIGN_IN
             })
         } catch (err) {
             console.log(err);
+            console.log(err.message);
+            dispatch({
+                user_details: {
+                    "_id": "",
+                    "email": "",
+                    "isAdmin": false,
+                    "image": "",
+                    "token": ""
+                },
+                error: err.message,
+                type: SIGN_IN
+            })
         }
     }
 }

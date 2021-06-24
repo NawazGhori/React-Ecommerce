@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { SignIn } from "../actions/SignInActions";
+import MessageBox from "../components/MessageBox";
 
 interface IProps {
     login_Fn: any;
@@ -20,11 +21,13 @@ class SignInScreen extends Component<IProps, IState>{
     };
 
     render() {
+        const {user_details,error } = this.props.res
         return (
             <React.Fragment>
                 <div className="row">
                     <form className="form" onSubmit={this.login}>
                         <div><h1>Sign In</h1></div>
+                        {error ? (<MessageBox variant="danger">{error.includes("401")? "Invalid Credentials":error}</MessageBox>):(<span></span>)}                         
                         <div>
                             <label>Email Address</label>
                             <input type="email" placeholder="Enter email" ref={this.uemail} required/> 
