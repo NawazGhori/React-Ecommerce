@@ -384,3 +384,42 @@ App.tsx
 Implementation of remove cart item functionality.
 	cartActionTypes.tsx, CartActions.tsx, CartReducer.tsx,CartScreen.tsx
 
+=================================================================================================
+
+								***** module4 implementation *****
+								***** signin module **************
+
+
+=> deploy profile pic aws server.
+	URL : https://ecommerce-9am.s3.ap-south-1.amazonaws.com/photo.jpg
+
+=> create the dummy(registration data) data.
+	data.js
+
+=> create the model
+			***********************************
+			server
+			     model
+				 	userModel.js
+			***********************************
+				finally "User" model is ready
+
+=> create the rest api to insert above data  (data.js)
+		************************************************
+		server
+		    server.js
+		*************************************************
+		finally backend is ready with following rest api call
+		=> http://localhost:8080/api/users/signin
+
+====================
+22-06-2021
+=====================
+	integrate above rest api call to SigninScreen
+
+1) model
+2) types
+3) actions
+4) reducer
+5) store
+6) SigninScreen

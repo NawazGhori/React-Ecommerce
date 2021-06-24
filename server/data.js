@@ -9,8 +9,8 @@ const data = {
             image: "https://ecommerce-9am.s3.ap-south-1.amazonaws.com/photo.jpg"
         },
         {
-            name: "Boss",
-            password: bcrypt.hashSync("admin", 8),
+            name: "James",
+            password: bcrypt.hashSync("james", 8),
             isAdmin: true,
             email: "james123@eshop.com",
             image: "https://ecommerce-9am.s3.ap-south-1.amazonaws.com/photo.jpg"

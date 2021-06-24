@@ -46,9 +46,16 @@ class CartScreen extends Component<IProps, IState>{
                         {finalArray.length === 0 ?
                             (<MessageBox variant="danger">Cart is Empty. <NavLink to="/" exact={true} strict>Start Shopping</NavLink></MessageBox>) : (
                                 <div>
-                                    <ul>
+                                    <ul className="cart-list-item">
+                                        <li>
+                                            <div>Product</div>
+                                            <div>Product</div>
+                                            <div>Price</div>
+                                            <div>Quantity</div>
+                                            <div></div>
+                                        </li>
                                         {finalArray.map((item: any, index: number) => (
-                                            <li key={index} className="cart-list-item">
+                                            <li key={index} >
                                                 <div>
                                                     <img src={item.image} alt={item.name} className="small_img" />
                                                 </div>
@@ -78,30 +85,36 @@ class CartScreen extends Component<IProps, IState>{
 
                     <div className="col-1">
 
-                        <div className="card card-body">
-                            <ul>
-                                <li>
-                                    <div className="row">
-                                        <div>Total Items</div>
-                                        <div>{finalArray.reduce((arg1: any, arg2: any) => arg1 + arg2.qty, 0)}</div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div className="row">
-                                        <div>Total Price</div>
-                                        <div>
-                                        {finalArray.reduce((arg1: any, arg2: any) => arg1 + arg2.price * arg2.qty, 0)}
+                        <div className="card">
+                            <div className="card-header">
+                                <h4>ORDER SUMMARY</h4>
+                            </div>
+                            <div className="card-body">
+                                <ul>
+                                    <li>
+                                        <div className="row">
+                                            <div>Total Items</div>
+                                            <div></div>
+                                            <div>{finalArray.reduce((arg1: any, arg2: any) => arg1 + arg2.qty, 0)}</div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <button className="primary block">Proceed to Pay</button>
-                                </li>
+                                    </li>
+
+                                    <li>
+                                        <div className="row">
+                                            <div>Total Price</div>
+                                            <div>
+                                                {finalArray.reduce((arg1: any, arg2: any) => arg1 + arg2.price * arg2.qty, 0)}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <button className="primary block">Proceed to Pay</button>
+                                    </li>
 
 
-                            </ul>
-                        </div>                        
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
