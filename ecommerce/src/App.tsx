@@ -11,61 +11,78 @@ import HomeScreen from './screens/HomeScreen';
 import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import SignInScreen from './screens/SignInScreen';
 
-interface IProps{
-   count:any
+interface IProps {
+   count: any;
+   profile_pic: string;
 }
-interface IState{}
+interface IState { }
 
-class App extends React.Component<IProps,IState>{
-   constructor(props:IProps){
+class App extends React.Component<IProps, IState>{
+   constructor(props: IProps) {
       super(props)
    }
-   render(){
-      return(
+   render() {
+      return (
          <React.Fragment>
-         <BrowserRouter>
+            <BrowserRouter>
 
 
-            <div className="grid-container">
-               <header className="row">
-                  <div>
-                     <NavLink to="/" exact={true} strict className="brand">EShop</NavLink>
-                  </div>
+               <div className="grid-container">
+                  <header className="row">
+                     <div>
+                        <NavLink to="/" exact={true} strict className="brand">EShop</NavLink>
+                     </div>
 
-                  <div>
-                     <NavLink to="/cart"exact={true} strict >Cart
-                        {this.props.count>0 ? <span className="badge-success">{this.props.count}</span>:<span className="badge-empty">{this.props.count}</span>}
-                     </NavLink>
-                     <NavLink to="/" exact={true} strict>SignIn</NavLink>
-                  </div>
-               </header>
+                     <div className="d-flex">
+                        <NavLink to="/cart" exact={true} strict >Cart
+                           {this.props.count > 0 ? <span className="badge-success">{this.props.count}</span> : <span className="badge-empty">{this.props.count}</span>}
+                        </NavLink>
+                        <NavLink to="/signIn" exact={true} strict>SignIn</NavLink>
+                        <div>
+                           {this.props.profile_pic ?
+                              <div className="dropdown d-flex">
+                                 <img src={this.props.profile_pic} alt="profile_pic" id="profile_pic" /><i className="fa fa-caret-down"></i>
+                                 <div className="dropdown-content">
+                                    <a href="#">Profile</a>
+                                    <a href="#">Orders</a>
+                                    <a href="#">Signout</a>
+                                 </div>
+                              </div>
+                              : <NavLink to="/signin" exact={true} strict><i className="fa fa-user" id="profile_pic" aria-hidden="true"></i></NavLink>
+                           }
+                        </div>
+                     </div>
+                  </header>
 
-               <main>
-                  <Route path="/" component={HomeScreen} exact={true} strict></Route>
-                  <Route path="/product/:id" component={ProductScreen} exact={true} strict></Route>
-                  <Route path="/cart/:id?" component={CartScreen} exact={true} strict></Route>
-               </main>
+                  <main>
+                     <Route path="/" component={HomeScreen} exact={true} strict></Route>
+                     <Route path="/product/:id" component={ProductScreen} exact={true} strict></Route>
+                     <Route path="/cart/:id?" component={CartScreen} exact={true} strict></Route>
+                     <Route path="/signin" component={SignInScreen} exact={true} strict></Route>
+                  </main>
 
-               <footer className="row center">copyright@eshop.in</footer>
-            </div>
-         </BrowserRouter>
-      </React.Fragment>
+                  <footer className="row center">copyright@eshop.in</footer>
+               </div>
+            </BrowserRouter>
+         </React.Fragment>
       )
    }
 }
 
-const receive = (state:any)=>{
+const receive = (state: any) => {
    return {
-      count: state.cart.finalArray.length
+      count: state.cart.finalArray.length,
+      profile_pic: state.signIn.user_details.image
    }
 }
 
-const send = (dispatch:any)=>{
-   return{
+const send = (dispatch: any) => {
+   return {
 
    }
 }
- 
-export default connect(receive,send)(App);
+
+export default connect(receive, send)(App);

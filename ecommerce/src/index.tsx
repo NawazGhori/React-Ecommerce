@@ -9,12 +9,14 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import detailReducer from './reducer/DetailReducer';
 import CartReducer from './reducer/CartReducer';
+import { SignInReducer } from './reducer/SignInReducer';
 
 
 const rootReducer = combineReducers({
   products: productReducer,
   details: detailReducer,
-  cart: CartReducer
+  cart: CartReducer,
+  signIn: SignInReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
