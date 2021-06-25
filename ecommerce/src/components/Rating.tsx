@@ -29,7 +29,7 @@ class Rating extends Component<IProps,IState> {
                     <span className={this.props.rating>=4 ? "fa fa-star" : this.props.rating >=3.5 ? "fa fa-star-half-o" : "fa fa-star-o"}></span>
                     <span className={this.props.rating>=5 ? "fa fa-star" : this.props.rating >=4.5 ? "fa fa-star-half-o" : "fa fa-star-o"}></span>
 
-                    <span>{this.props.numReviews}</span>
+                    <div>{this.props.numReviews} Reviews</div>
                 </div>
             </React.Fragment>
         )

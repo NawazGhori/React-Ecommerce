@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { match } from "react-router";
-import { Location } from "history";
 import { connect } from "react-redux";
 import addCartItem, { deleteCartItem } from "../actions/CartActions";
-import { NavLink } from "react-router-dom";
+import { match,NavLink } from "react-router-dom";
 import MessageBox from "../components/MessageBox";
+import { History, LocationState } from "history";
 
 interface IProps {
     match: match<routeParams>;
@@ -12,6 +11,8 @@ interface IProps {
     res: any;
     getAddItemResult: any;
     deleteItemResult: any;
+    user_details: any;
+    history: History<LocationState>;
 };
 
 interface IState { };
@@ -34,6 +35,11 @@ class CartScreen extends Component<IProps, IState>{
     }
     deleteItem = (id: any) => {
         this.props.deleteItemResult(id)
+    }
+    checkUser = () => {
+        let redirect_url = this.props.user_details.image == "" ? "signin" : "payment"
+        console.log(redirect_url)
+        this.props.history.push(redirect_url)
     }
     render() {
         const { finalArray } = this.props.res
@@ -108,7 +114,7 @@ class CartScreen extends Component<IProps, IState>{
                                         </div>
                                     </li>
                                     <li>
-                                        <button className="primary block">Proceed to Pay</button>
+                                        <button className="primary block" onClick={this.checkUser}>Proceed to Pay</button>
                                     </li>
 
 
@@ -119,7 +125,7 @@ class CartScreen extends Component<IProps, IState>{
 
                 </div>
                 {/* {JSON.stringify(finalArray)} */}
-
+                {/* {JSON.stringify(this.props.user_details)} */}
             </React.Fragment>
         )
     }
@@ -127,7 +133,8 @@ class CartScreen extends Component<IProps, IState>{
 
 const receive = (state: any) => {
     return {
-        res: state.cart
+        res: state.cart,
+        user_details: state.signIn.user_details
     }
 }
 

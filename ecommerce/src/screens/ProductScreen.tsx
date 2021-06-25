@@ -54,7 +54,7 @@ class ProductScreen extends Component<IProps, IState>{
                         <div className="row top">
 
                             <div className="col-2">
-                                <img src={product.image} alt={product.name} />
+                                <img src={product.image} alt={product.name} className="product-img"/>
                             </div>
 
                             <div className="col-1">

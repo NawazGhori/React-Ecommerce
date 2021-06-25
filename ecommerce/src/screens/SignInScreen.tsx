@@ -21,7 +21,7 @@ class SignInScreen extends Component<IProps, IState>{
     };
 
     render() {
-        const {user_details,error } = this.props.res
+        const {error } = this.props.res
         return (
             <React.Fragment>
                 <div className="row">
@@ -40,7 +40,7 @@ class SignInScreen extends Component<IProps, IState>{
                             <button type="submit" className="button primary">Sign In</button>
                         </div>
                         <div>
-                            <div>New Customer ? <a href="/">Create New Account</a></div>
+                            <div>New Customer ? <a href="/signup">Create New Account</a></div>
                         </div>
                     </form>                    
                 </div>

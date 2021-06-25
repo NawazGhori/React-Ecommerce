@@ -37,7 +37,7 @@ app.use(bodyparser.urlencoded({ extended: false }));
 dotenv.config();
 
 
-let MONGODB_URL = process.env.MONGODB_URL_TEST
+let MONGODB_URL = process.env.MONGODB_URL
     //connect to mongodb database by using mongoose module
 mongoose.connect(MONGODB_URL, {
     useNewUrlParser: true,

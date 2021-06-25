@@ -13,6 +13,8 @@ import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import { connect } from "react-redux";
 import SignInScreen from './screens/SignInScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import PaymentScreen from './screens/PaymentScreen';
 
 interface IProps {
    count: any;
@@ -29,7 +31,6 @@ class App extends React.Component<IProps, IState>{
          <React.Fragment>
             <BrowserRouter>
 
-
                <div className="grid-container">
                   <header className="row">
                      <div>
@@ -37,14 +38,17 @@ class App extends React.Component<IProps, IState>{
                      </div>
 
                      <div className="d-flex">
-                        <NavLink to="/cart" exact={true} strict >Cart
+                        {/* <NavLink to="/cart" exact={true} strict >Cart
                            {this.props.count > 0 ? <span className="badge-success">{this.props.count}</span> : <span className="badge-empty">{this.props.count}</span>}
+                        </NavLink> */}
+                        <NavLink to="/cart" exact={true} strict ><i className="fa fa-shopping-cart" aria-hidden="true" id="#cart-icon"></i>
+                           {this.props.count > 0 ? <span className="badge badge-success">{this.props.count}</span> : <span className="badge badge-empty">{this.props.count}</span>}
                         </NavLink>
-                        <NavLink to="/signIn" exact={true} strict>SignIn</NavLink>
+                        {/* <NavLink to="/signIn" exact={true} strict>SignIn</NavLink> */}
                         <div>
                            {this.props.profile_pic ?
                               <div className="dropdown d-flex">
-                                 <img src={this.props.profile_pic} alt="profile_pic" id="profile_pic" /><i className="fa fa-caret-down"></i>
+                                 <img src={this.props.profile_pic} alt="profile_pic" id="profile_pic" /><i className="fa fa-caret-down" aria-hidden="true"></i>
                                  <div className="dropdown-content">
                                     <a href="#">Profile</a>
                                     <a href="#">Orders</a>
@@ -62,6 +66,8 @@ class App extends React.Component<IProps, IState>{
                      <Route path="/product/:id" component={ProductScreen} exact={true} strict></Route>
                      <Route path="/cart/:id?" component={CartScreen} exact={true} strict></Route>
                      <Route path="/signin" component={SignInScreen} exact={true} strict></Route>
+                     <Route path="/signup" component={SignUpScreen} exact={true} strict></Route>
+                     <Route path="/payment" component={PaymentScreen} exact={true} strict></Route>
                   </main>
 
                   <footer className="row center">copyright@eshop.in</footer>
