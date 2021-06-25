@@ -15,6 +15,8 @@ const data = require("./data");
 const generateToken = require("./generateToken");
 
 
+
+
 //to develop "rest api's" we should create "rest" object
 //we must dependent on "express" to develop "rest" object
 const app = express();
@@ -35,7 +37,7 @@ app.use(bodyparser.urlencoded({ extended: false }));
 dotenv.config();
 
 
-let MONGODB_URL = process.env.MONGODB_URL
+let MONGODB_URL = process.env.MONGODB_URL_TEST
     //connect to mongodb database by using mongoose module
 mongoose.connect(MONGODB_URL, {
     useNewUrlParser: true,
@@ -55,6 +57,13 @@ app.get("/api/products", express_async_handler(async(req, res) => {
 }))
 
 
+
+app.get("/api/products/seed", express_async_handler(async(req, res) => {
+    await Product.remove();
+    const createProducts = await Product.insertMany(data.products);
+    res.send({ createProducts })
+}))
+
 //GET request to get a product with specified id
 app.get("/api/products/:id", express_async_handler(async(req, res) => {
     //const product = await Product.findOne({ "_id": new mongodb.ObjectID(req.params.id) });
@@ -64,12 +73,6 @@ app.get("/api/products/:id", express_async_handler(async(req, res) => {
     } else {
         res.status(400).send({ "message": "no product available" })
     }
-}))
-
-app.get("/api/products/seed", express_async_handler(async(req, res) => {
-    await Product.remove();
-    const createProducts = await Product.insertMany(data.products);
-    res.send({ createProducts })
 }))
 
 app.get("/api/users/seed", express_async_handler(async(req, res) => {

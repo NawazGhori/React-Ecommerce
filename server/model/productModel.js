@@ -2,7 +2,7 @@ const { ObjectID } = require("bson");
 const mongoose = require("mongoose")
 
 const productSchema = new mongoose.Schema({
-    "_id": { type: ObjectID, required: true },
+    // "_id": { type: ObjectID, required: true },
     "name": { type: String, required: true },
     "brand": { type: String, required: true },
     "price": { type: Number, required: true },
