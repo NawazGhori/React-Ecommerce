@@ -41,7 +41,7 @@ class App extends React.Component<IProps, IState>{
                         {/* <NavLink to="/cart" exact={true} strict >Cart
                            {this.props.count > 0 ? <span className="badge-success">{this.props.count}</span> : <span className="badge-empty">{this.props.count}</span>}
                         </NavLink> */}
-                        <NavLink to="/cart" exact={true} strict ><i className="fa fa-shopping-cart" aria-hidden="true" id="#cart-icon"></i>
+                        <NavLink to="/cart" exact={true} strict ><i className="fa fa-shopping-cart" aria-hidden="true" id="cart-icon"></i>
                            {this.props.count > 0 ? <span className="badge badge-success">{this.props.count}</span> : <span className="badge badge-empty">{this.props.count}</span>}
                         </NavLink>
                         {/* <NavLink to="/signIn" exact={true} strict>SignIn</NavLink> */}

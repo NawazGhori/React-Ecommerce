@@ -168,11 +168,12 @@ ul li {
 }
 
 button.primary {
-    background-color: #f0c040;
-    padding: 0.5rem;
+    background-color: #f1b20b;
+    padding: 0.8rem;
     border: none;
-    color: #211c1c;
+    color: #040403;
     font-weight: 700;
+    border-radius: 0.5rem;
 }
 
 button.block {
@@ -242,12 +243,18 @@ button.block {
 
 .form {
     max-width: 60rem;
+    min-width: 40rem;
     margin: 0 auto;
 }
 
 .form>div {
     display: flex;
     flex-direction: column;
+    margin: 1rem;
+}
+
+.form .checkbox-div {
+    flex-direction: row;
     margin: 1rem;
 }
 

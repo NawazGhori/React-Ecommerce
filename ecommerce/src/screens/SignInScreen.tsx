@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { SignIn } from "../actions/SignInActions";
 import MessageBox from "../components/MessageBox";
+import {History,LocationState} from "history";
 
 interface IProps {
     login_Fn: any;
     res: any;
+    history: History<LocationState>
 }
 interface IState { }
 class SignInScreen extends Component<IProps, IState>{
@@ -15,9 +17,13 @@ class SignInScreen extends Component<IProps, IState>{
 
     uemail = React.createRef<HTMLInputElement>();
     upwd = React.createRef<HTMLInputElement>();
-    login = (e:any)=>{   
-        e.preventDefault()
-        this.props.login_Fn({"email":this.uemail.current?.value,"password":this.upwd.current?.value})
+    login = async(e:any)=>{   
+        await e.preventDefault()
+        await this.props.login_Fn({"email":this.uemail.current?.value,"password":this.upwd.current?.value})
+        console.log(this.props.res)
+        if(this.props.res.user_details._id!=""){
+            await this.props.history.push("/cart")
+        }
     };
 
     render() {

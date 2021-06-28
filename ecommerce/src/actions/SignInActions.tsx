@@ -3,7 +3,7 @@ import { Dispatch } from "redux"
 import { SIGN_IN, SignInActionTypes } from "../types/SignInActionTypes"
 
 export const SignIn = (login_details: any) => {
-    return async (dispatch: Dispatch<SignInActionTypes>) => {
+    return async (dispatch: Dispatch<SignInActionTypes>, getState: () => any) => {
         try {
             const res = await axios.post('http://localhost:8080/api/users/signin', login_details)
             const { data } = res;
@@ -12,9 +12,8 @@ export const SignIn = (login_details: any) => {
                 error: "",
                 type: SIGN_IN
             })
+            window.localStorage.setItem("user_details",JSON.stringify(getState().signIn.user_details));
         } catch (err) {
-            console.log(err);
-            console.log(err.message);
             dispatch({
                 user_details: {
                     "_id": "",

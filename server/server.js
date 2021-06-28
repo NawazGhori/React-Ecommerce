@@ -100,6 +100,29 @@ app.post("/api/users/signin", express_async_handler(async(req, res) => {
     }
 }))
 
+
+//register the user
+app.post("/api/users/register", express_async_handler(async(req, res) => {
+    const user = await User.findOne({ "email": req.body.email })
+    if (!user) {
+        let new_user = await req.body
+        new_user.password = await bcryptjs.hashSync(new_user.password, 8)
+            // const insertUser = await new User(new_user);
+            // await insertUser.save(function(err, insertUserObj) {
+            //     console.log(insertUserObj)
+            //     if (err) res.status(401).send({ "message": err })
+            //     res.status(200).send({ "message": "Registered successfully!!" })
+            // });
+        await User.create(new_user, function(err, insertUserObj) {
+            // console.log(insertUserObj)
+            if (err) res.status(401).send({ "message": err })
+            res.status(200).send({ "message": "Registered successfully!!" })
+        })
+    } else {
+        res.status(401).send({ "message": "Email Already exists!!" })
+    }
+}))
+
 //assign the PORT number
 let port = process.env.PORT || 8080;
 app.listen(port, () => {
