@@ -1,9 +1,10 @@
 import { Signin } from "../model/Signin";
-import { SIGN_IN, SignInActionTypes, SIGN_OUT } from "../types/SignInActionTypes"
+import { SIGN_IN, SignInActionTypes, SIGN_OUT, SIGN_UP } from "../types/SignInActionTypes"
 
 interface IState {
     user_details: Signin;
     error: String;
+    message:String;
 }
 const initalState = {
     user_details: window.localStorage.getItem("user_details") ? (JSON.parse(window.localStorage.getItem("user_details") || "{}")) :
@@ -14,7 +15,8 @@ const initalState = {
             "image": "",
             "token": ""
         },
-    error: ""
+    error: "",
+    message:""
 }
 export const SignInReducer = (state = initalState, action: SignInActionTypes): IState => {
     switch (action.type) {
@@ -22,13 +24,22 @@ export const SignInReducer = (state = initalState, action: SignInActionTypes): I
             return {
                 ...state,
                 user_details: action.user_details,
-                error: action.error
+                error: action.error,
+                message:action.message
             }
         case SIGN_OUT:
             return {
                 ...state,
                 user_details: action.user_details,
-                error: action.error
+                error: action.error,
+                message:action.message
+            }
+        case SIGN_UP:
+            return {
+                ...state,
+                user_details: action.user_details,
+                error: action.error,
+                message:action.message
             }
         default:
             return state;
