@@ -18,13 +18,18 @@ import PaymentScreen from './screens/PaymentScreen';
 
 interface IProps {
    count: any;
-   profile_pic: string;
+   user_details: any;
 }
 interface IState { }
 
 class App extends React.Component<IProps, IState>{
    constructor(props: IProps) {
       super(props)
+   }
+   logout = (e: any) => {
+      e.preventDefault();
+      console.log(this.props.user_details)
+      console.log(this.props)
    }
    render() {
       return (
@@ -38,36 +43,40 @@ class App extends React.Component<IProps, IState>{
                      </div>
 
                      <div className="d-flex">
-                        {/* <NavLink to="/cart" exact={true} strict >Cart
-                           {this.props.count > 0 ? <span className="badge-success">{this.props.count}</span> : <span className="badge-empty">{this.props.count}</span>}
-                        </NavLink> */}
+
                         <NavLink to="/cart" exact={true} strict ><i className="fa fa-shopping-cart" aria-hidden="true" id="cart-icon"></i>
                            {this.props.count > 0 ? <span className="badge badge-success">{this.props.count}</span> : <span className="badge badge-empty">{this.props.count}</span>}
                         </NavLink>
-                        {/* <NavLink to="/signIn" exact={true} strict>SignIn</NavLink> */}
+
                         <div>
-                           {this.props.profile_pic ?
+                           {this.props.user_details.image ?
                               <div className="dropdown d-flex">
-                                 <img src={this.props.profile_pic} alt="profile_pic" id="profile_pic" /><i className="fa fa-caret-down" aria-hidden="true"></i>
+                                 <img src={this.props.user_details.image} alt="profile_pic" id="profile_pic" /><i className="fa fa-caret-down" aria-hidden="true"></i>
                                  <div className="dropdown-content">
                                     <a href="#">Profile</a>
                                     <a href="#">Orders</a>
                                     <a href="#">Signout</a>
                                  </div>
                               </div>
-                              : <NavLink to="/signin" exact={true} strict><i className="fa fa-user" id="profile_pic" aria-hidden="true"></i></NavLink>
+                              : <NavLink to="/signin" exact={true} strict>
+                                 <i className="fa fa-user-circle" id="profile_pic_icon" aria-hidden="true"></i>
+                              </NavLink>
                            }
+                        <button onClick={this.logout}>Signout</button>
                         </div>
                      </div>
+                     
                   </header>
 
                   <main>
-                     <Route path="/" component={HomeScreen} exact={true} strict></Route>
-                     <Route path="/product/:id" component={ProductScreen} exact={true} strict></Route>
-                     <Route path="/cart/:id?" component={CartScreen} exact={true} strict></Route>
-                     <Route path="/signin" component={SignInScreen} exact={true} strict></Route>
-                     <Route path="/signup" component={SignUpScreen} exact={true} strict></Route>
-                     <Route path="/payment" component={PaymentScreen} exact={true} strict></Route>
+                     <BrowserRouter>
+                        <Route path="/" component={HomeScreen} exact={true} strict></Route>
+                        <Route path="/product/:id" component={ProductScreen} exact={true} strict></Route>
+                        <Route path="/cart/:id?" component={CartScreen} exact={true} strict></Route>
+                        <Route path="/signin" component={SignInScreen} exact={true} strict></Route>
+                        <Route path="/signup" component={SignUpScreen} exact={true} strict></Route>
+                        <Route path="/payment" component={PaymentScreen} exact={true} strict></Route>
+                     </BrowserRouter>
                   </main>
 
                   <footer className="row center">copyright@eshop.in</footer>
@@ -81,7 +90,7 @@ class App extends React.Component<IProps, IState>{
 const receive = (state: any) => {
    return {
       count: state.cart.finalArray.length,
-      profile_pic: state.signIn.user_details.image
+      user_details: state.signIn.user_details
    }
 }
 

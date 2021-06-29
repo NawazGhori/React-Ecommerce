@@ -272,6 +272,10 @@ button.block {
     justify-content: space-around
 }
 
+#profile_pic_icon {
+    font-size: 2.8rem;
+}
+
 #profile_pic {
     width: 3rem;
     height: 3rem;

@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Dispatch } from "redux"
-import { SIGN_IN, SignInActionTypes } from "../types/SignInActionTypes"
+import { SIGN_IN, SignInActionTypes, SIGN_OUT } from "../types/SignInActionTypes"
 
 export const SignIn = (login_details: any) => {
     return async (dispatch: Dispatch<SignInActionTypes>, getState: () => any) => {
@@ -12,7 +12,7 @@ export const SignIn = (login_details: any) => {
                 error: "",
                 type: SIGN_IN
             })
-            window.localStorage.setItem("user_details",JSON.stringify(getState().signIn.user_details));
+            window.localStorage.setItem("user_details", JSON.stringify(getState().signIn.user_details));
         } catch (err) {
             dispatch({
                 user_details: {
@@ -29,3 +29,19 @@ export const SignIn = (login_details: any) => {
     }
 }
 
+export const SignOut = () => {
+    return async (dispatch: Dispatch<SignInActionTypes>) => {
+        dispatch({
+            user_details: {
+                "_id": "",
+                "email": "",
+                "isAdmin": false,
+                "image": "",
+                "token": ""
+            },
+            error: "",
+            type: SIGN_OUT
+        })
+        window.localStorage.removeItem("user_details")
+    }
+}
