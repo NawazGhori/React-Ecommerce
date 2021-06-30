@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import detailReducer from './reducer/DetailReducer';
 import CartReducer from './reducer/CartReducer';
 import { SignInReducer } from './reducer/SignInReducer';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const rootReducer = combineReducers({
@@ -22,9 +23,11 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

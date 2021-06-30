@@ -155,7 +155,7 @@ ul {
     list-style-type: none;
 }
 
-ul li {
+.card ul li {
     margin-top: 1rem;
 }
 
@@ -307,13 +307,17 @@ button.block {
 
 .dropdown-content a {
     color: black;
-    text-decoration: none;
     display: block;
     text-align: center;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown-content.visible {
     display: block;
+}
+
+.dropdown-content li:hover a {
+    background-color: blue;
+    color: #ffffff;
 }
 
 .dropdown i.fa.fa-caret-down {

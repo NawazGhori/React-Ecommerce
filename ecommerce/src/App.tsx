@@ -15,21 +15,36 @@ import { connect } from "react-redux";
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import { SignOut } from './actions/SignInActions';
 
 interface IProps {
    count: any;
    user_details: any;
+   logout_Fn: any;
+   
 }
-interface IState { }
+interface IState {
+   displayNavDropDown: any
+}
 
 class App extends React.Component<IProps, IState>{
    constructor(props: IProps) {
       super(props)
+      this.state = {
+         displayNavDropDown: ''
+      }
    }
    logout = (e: any) => {
       e.preventDefault();
-      console.log(this.props.user_details)
-      console.log(this.props)
+      this.props.logout_Fn()
+      this.toogleNavDropdown()
+      //this.props.history.push('/signin')
+   }
+
+   toogleNavDropdown = () => {
+      this.setState({
+         displayNavDropDown: !this.state.displayNavDropDown
+      })
    }
    render() {
       return (
@@ -51,32 +66,33 @@ class App extends React.Component<IProps, IState>{
                         <div>
                            {this.props.user_details.image ?
                               <div className="dropdown d-flex">
-                                 <img src={this.props.user_details.image} alt="profile_pic" id="profile_pic" /><i className="fa fa-caret-down" aria-hidden="true"></i>
-                                 <div className="dropdown-content">
-                                    <a href="#">Profile</a>
-                                    <a href="#">Orders</a>
-                                    <a href="#">Signout</a>
-                                 </div>
+                                 <img src={this.props.user_details.image} alt="profile_pic" id="profile_pic" />
+                                 <i className="fa fa-caret-down" aria-hidden="true" onClick={this.toogleNavDropdown}></i>
+
+                                 <ul className={`dropdown-content ${this.state.displayNavDropDown ? 'visible' : ''}`}>
+                                    <li> <NavLink to="#">Profile</NavLink></li>
+                                    <li> <NavLink to="#">Orders</NavLink></li>
+                                    <li> <NavLink to="#" onClick={this.logout}>Signout</NavLink></li>
+                                 </ul>
                               </div>
                               : <NavLink to="/signin" exact={true} strict>
                                  <i className="fa fa-user-circle" id="profile_pic_icon" aria-hidden="true"></i>
                               </NavLink>
                            }
-                        <button onClick={this.logout}>Signout</button>
                         </div>
                      </div>
-                     
+
                   </header>
 
                   <main>
-                     <BrowserRouter>
-                        <Route path="/" component={HomeScreen} exact={true} strict></Route>
-                        <Route path="/product/:id" component={ProductScreen} exact={true} strict></Route>
-                        <Route path="/cart/:id?" component={CartScreen} exact={true} strict></Route>
-                        <Route path="/signin" component={SignInScreen} exact={true} strict></Route>
-                        <Route path="/signup" component={SignUpScreen} exact={true} strict></Route>
-                        <Route path="/payment" component={PaymentScreen} exact={true} strict></Route>
-                     </BrowserRouter>
+
+                     <Route path="/" component={HomeScreen} exact={true} strict></Route>
+                     <Route path="/product/:id" component={ProductScreen} exact={true} strict></Route>
+                     <Route path="/cart/:id?" component={CartScreen} exact={true} strict></Route>
+                     <Route path="/signin" component={SignInScreen} exact={true} strict></Route>
+                     <Route path="/signup" component={SignUpScreen} exact={true} strict></Route>
+                     <Route path="/payment" component={PaymentScreen} exact={true} strict></Route>
+
                   </main>
 
                   <footer className="row center">copyright@eshop.in</footer>
@@ -90,13 +106,14 @@ class App extends React.Component<IProps, IState>{
 const receive = (state: any) => {
    return {
       count: state.cart.finalArray.length,
-      user_details: state.signIn.user_details
+      user_details: state.signIn.user_details,
+
    }
 }
 
 const send = (dispatch: any) => {
    return {
-
+      logout_Fn: () => { dispatch(SignOut()) }
    }
 }
 

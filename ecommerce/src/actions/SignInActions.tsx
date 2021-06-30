@@ -51,12 +51,10 @@ export const SignOut = () => {
 
 export const SignUp = (signup_details:any) => {
     return async (dispatch:Dispatch<SignInActionTypes>) =>{
-        try {
-            console.log("from signup")
-            console.log(signup_details)
+        try {           
             const res = await axios.post('http://localhost:8080/api/users/register', signup_details)
             const { data } = res;
-            console.log(data.message)
+            
             dispatch({
                 user_details: {
                     "_id": "",

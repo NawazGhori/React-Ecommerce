@@ -25,7 +25,7 @@ class SignInScreen extends Component<IProps, IState>{
             //this.props.history.push("/cart")
         }
     }
-    
+
     login = async (e: any) => {
         e.preventDefault()
         await this.props.login_Fn({ "email": this.uemail.current?.value, "password": this.upwd.current?.value })
@@ -33,10 +33,6 @@ class SignInScreen extends Component<IProps, IState>{
 
     };
 
-    logout = (e: any) => {
-        e.preventDefault();
-        this.props.logout_Fn()
-    }
     render() {
         const { error } = this.props.res
         return (
@@ -59,9 +55,6 @@ class SignInScreen extends Component<IProps, IState>{
                         <div>
                             <div>New Customer ? <a href="/signup">Create New Account</a></div>
                         </div>
-                        <div>
-                            <button onClick={this.logout}>Signout</button>
-                        </div>
                     </form>
                 </div>
             </React.Fragment>
@@ -79,8 +72,7 @@ const receive = (state: any) => {
 //dispatch
 const send = (dispatch: any) => {
     return {
-        login_Fn: (obj: any) => { dispatch(SignIn(obj)) },
-        logout_Fn: () => { dispatch(SignOut()) }
+        login_Fn: (obj: any) => { dispatch(SignIn(obj)) }
     }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import addCartItem, { deleteCartItem } from "../actions/CartActions";
-import { match,NavLink } from "react-router-dom";
+import { match, NavLink } from "react-router-dom";
 import MessageBox from "../components/MessageBox";
 import { History, LocationState } from "history";
 
@@ -37,8 +37,7 @@ class CartScreen extends Component<IProps, IState>{
         this.props.deleteItemResult(id)
     }
     checkUser = () => {
-        let redirect_url = this.props.user_details.image == "" ? "signin" : "payment"
-        console.log(redirect_url)
+        let redirect_url = this.props.user_details.image == "" ? "/signin" : "/payment"
         this.props.history.push(redirect_url)
     }
     render() {
